@@ -64,9 +64,9 @@ export default function Instrucciones() {
     
           <h3 className={styles.h3}>¡Que empiece el juego!</h3>
           <p className={styles.p}>Haz clic en "Comenzar" para iniciar el juego y demuestra tus conocimientos sobre banderas. ¡Buena suerte!</p>
-          <Link href="/" passHref>
-                <a className={styles.button}>Comenzar</a> {/* Usa un enlace como botón */}
-            </Link>
+          <Link href="/" className={styles.button}>
+             Comenzar
+        </Link>
         </div>
     );
 }
