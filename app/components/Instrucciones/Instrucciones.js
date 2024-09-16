@@ -1,3 +1,4 @@
+'use client'
 import styles from './Instrucciones.module.css';  // Importa los estilos de Instrucciones.module.css
 import Titulo from "../Titulo/Titulo";
 import Subtitulo from "../Subtitulo/Subtitulo";
@@ -63,9 +64,9 @@ export default function Instrucciones() {
           </ul>
     
           <h3 className={styles.h3}>¡Que empiece el juego!</h3>
-          <p className={styles.p}>Haz clic en "Comenzar" para iniciar el juego y demuestra tus conocimientos sobre banderas. ¡Buena suerte!</p>
-          <Link href="/" className={styles.button}>
-             Comenzar
+          <p className={styles.p}>Haz clic en "AVANZAR" para escribir tu nombre y luego, iniciar el juego y demostrar tus conocimientos sobre banderas. ¡Buena suerte!</p>
+          <Link href="/NombreJugador" className={styles.button}>
+             Avanzar
         </Link>
         </div>
     );
