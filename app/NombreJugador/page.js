@@ -26,6 +26,7 @@ export default function NombreJugador() {
       <div className={styles.message}>
         Antes de comenzar le pedimos que inserte su nombre
       </div>
+      
       <form onSubmit={handleSubmit} className={styles.form}>
         <input
           type="text"
@@ -36,6 +37,9 @@ export default function NombreJugador() {
           className={styles.input}
         />
         <button type="submit" className={styles.submitButton}>Guardar Nombre</button>
+        <div className={styles.message2}>
+            El boton de "Comenzar" aparecerá si se guardó el nombre correctamente
+      </div>
         {isNameSaved && (
         <Link href="/JuegoBandera">
           <button className={styles.startButton}>Comenzar</button>
