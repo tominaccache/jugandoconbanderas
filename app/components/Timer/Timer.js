@@ -7,22 +7,23 @@ const Temporizador = ({ onTimeUp }) => {
 
   useEffect(() => {
     if (tiempo === 0) {
-      onTimeUp(tiempo); // Llama a la función cuando el tiempo se acaba y pasa el tiempo restante
-      return;
+      onTimeUp(tiempo);
+      setTiempo(15);
     }
 
     const timer = setInterval(() => {
       setTiempo((prevTiempo) => prevTiempo - 1);
     }, 1000);
 
-    return () => clearInterval(timer); // Limpia el intervalo cuando el componente se desmonta
+    return () => clearInterval(timer); 
   }, [tiempo, onTimeUp]);
 
   return (
-    <div>
+    <div className={styles.timerContainer}>
       <h3>Tiempo Restante: {tiempo}s</h3>
     </div>
   );
 };
 
 export default Temporizador;
+
