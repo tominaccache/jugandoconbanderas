@@ -55,7 +55,7 @@ export default function JuegoBandera() {
       setPuntos(prev => prev + 10);
       setPuntos(prev => prev + tiempoRestante);
     } else if (puntos > 0) {
-      setPuntos(prev => prev - 1);
+      setPuntos(prev => prev );
     }
     manejarTiempoAgotado();
   };
@@ -89,6 +89,7 @@ export default function JuegoBandera() {
             value={respuesta}
             onChange={(e) => setRespuesta(e.target.value)} 
             className={styles.input}
+            
           />
           <button 
             onClick={verificarRespuesta} 
