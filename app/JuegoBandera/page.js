@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Puntos from '../components/Puntos/Puntos';
 import Temporizador from '../components/Timer/Timer';
 import Ayuda from '../components/Ayuda/Ayuda';
-import styles from './page.module.css'; // Importa los estilos
+import styles from './page.module.css'; 
 
 export default function JuegoBandera() {
   const [banderas, setBanderas] = useState([]);

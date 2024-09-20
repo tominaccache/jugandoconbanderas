@@ -1,22 +1,17 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import styles from './page.module.css'; // Importamos el módulo CSS
+import styles from './page.module.css'; 
 
 export default function NombreJugador() {
   const [nombre, setNombre] = useState('');
-  const [isNameSaved, setIsNameSaved] = useState(false); // Para verificar si el nombre está guardado
+  const [isNameSaved, setIsNameSaved] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (nombre.trim()) {
-      // Guardar el nombre en localStorage
       localStorage.setItem('nombreJugador', nombre);
-
-      // Limpiar el input
       setNombre('');
-
-      // Cambiar el estado para indicar que el nombre se ha guardado
       setIsNameSaved(true);
     }
   };
