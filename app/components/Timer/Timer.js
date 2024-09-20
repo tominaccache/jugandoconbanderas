@@ -1,29 +1,28 @@
 'use client';
-import React, { useState, useEffect } from 'react';
-import styles from './Timer.module.css';
+import React, { useEffect } from 'react';
 
-const Temporizador = ({ onTimeUp }) => {
-  const [tiempo, setTiempo] = useState(15);
-
+const Temporizador = ({ tiempoRestante, setTiempoRestante, onTimeUp }) => {
   useEffect(() => {
-    if (tiempo === 0) {
-      onTimeUp(tiempo);
-      setTiempo(15);
+    // Solo iniciar el temporizador si hay tiempo restante
+    if (tiempoRestante > 0) {
+      // Crear un intervalo que se ejecuta cada segundo
+      const timer = setInterval(() => {
+        setTiempoRestante(prev => prev - 1); // Restar 1 al tiempo restante
+      }, 1000);
+
+      // Limpiar el intervalo cuando el componente se desmonta o el tiempo cambia
+      return () => clearInterval(timer);
+    } else {
+      // Si el tiempo se acaba, llamar a la función onTimeUp
+      onTimeUp();
     }
-
-    const timer = setInterval(() => {
-      setTiempo((prevTiempo) => prevTiempo - 1);
-    }, 1000);
-
-    return () => clearInterval(timer); 
-  }, [tiempo, onTimeUp]);
+  }, [tiempoRestante, setTiempoRestante, onTimeUp]);
 
   return (
-    <div className={styles.timerContainer}>
-      <h3>Tiempo Restante: {tiempo}s</h3>
+    <div>
+      Tiempo Restante: {tiempoRestante}s
     </div>
   );
 };
 
 export default Temporizador;
-

@@ -1,12 +1,18 @@
-'use client';
+'use client'; 
 import React, { useState, useEffect } from 'react';
 import Puntos from '../components/Puntos/Puntos';
 import Temporizador from '../components/Timer/Timer';
+import Ayuda from '../components/Ayuda/Ayuda';
+import styles from './page.module.css'; // Importa los estilos
 
 export default function JuegoBandera() {
   const [banderas, setBanderas] = useState([]);
   const [banderaSeleccionada, setBanderaSeleccionada] = useState(null);
   const [puntos, setPuntos] = useState(0);
+  const [respuesta, setRespuesta] = useState('');
+  const [tiempoRestante, setTiempoRestante] = useState(15);
+  const [isGameActive, setIsGameActive] = useState(false);
+  const [nombreJugador, setNombreJugador] = useState('');
 
   useEffect(() => {
     const fetchBanderas = async () => {
@@ -15,7 +21,7 @@ export default function JuegoBandera() {
         if (response.ok) {
           const data = await response.json();
           setBanderas(data.data);
-          seleccionarBanderaAleatoria(data.data); // Seleccionar una bandera aleatoria
+          seleccionarBanderaAleatoria(data.data);
         }
       } catch (error) {
         console.error('Error al conectar con la API de banderas:', error);
@@ -23,36 +29,66 @@ export default function JuegoBandera() {
     };
 
     fetchBanderas();
+    const storedName = localStorage.getItem('nombreJugador');
+    if (storedName) setNombreJugador(storedName);
   }, []);
 
   const seleccionarBanderaAleatoria = (banderas) => {
     const indiceAleatorio = Math.floor(Math.random() * banderas.length);
     setBanderaSeleccionada(banderas[indiceAleatorio]);
+    setRespuesta('');
+    setTiempoRestante(15);
+    setIsGameActive(true);
   };
 
-  const manejarTiempoAgotado = (tiempoRestante) => {
-    // Si el tiempo se agota, sumar los segundos restantes como puntos
-    const puntosGanados = tiempoRestante > 0 ? tiempoRestante : 0; // Solo sumar si hay tiempo restante
-    setPuntos((prevPuntos) => prevPuntos + puntosGanados);
-    console.log(`El tiempo se ha agotado. Se han sumado ${puntosGanados} puntos.`);
-    
-    // Seleccionar una nueva bandera aleatoria después de que se agote el tiempo
+  const manejarTiempoAgotado = () => {
+    setIsGameActive(false);
     seleccionarBanderaAleatoria(banderas);
   };
 
+  const verificarRespuesta = () => {
+    if (respuesta.toLowerCase() === banderaSeleccionada.name.toLowerCase()) {
+      setPuntos(prev => prev + 10);
+    } else if (puntos > 0) {
+      setPuntos(prev => prev - 1);
+    }
+    manejarTiempoAgotado();
+  };
+
   return (
-    <div>
+    <div className={styles.container}>
       {banderaSeleccionada && (
-        <div>
+        <div className={styles.juegoContainer}>
           <img 
             src={banderaSeleccionada.flag} 
             alt={`Bandera de ${banderaSeleccionada.name}`} 
+            className={styles.bandera}
           />
-          <Temporizador setPuntos={setPuntos} onTimeUp={manejarTiempoAgotado} />
+          <Temporizador 
+            tiempoRestante={tiempoRestante} 
+            setTiempoRestante={setTiempoRestante} 
+            onTimeUp={manejarTiempoAgotado} 
+          />
           <Puntos 
             puntos={puntos} 
-            setPuntos={setPuntos} 
-            banderaSeleccionada={banderaSeleccionada} // Pasar la bandera seleccionada
+            nombreJugador={nombreJugador} 
+          />
+          <input
+            type="text"
+            placeholder="Adivina el país"
+            value={respuesta}
+            onChange={(e) => setRespuesta(e.target.value)} 
+            className={styles.input}
+          />
+          <button 
+            onClick={verificarRespuesta} 
+            className={styles.button}
+          >
+            Enviar Respuesta
+          </button>
+          <Ayuda 
+            banderaSeleccionada={banderaSeleccionada} 
+            setTiempoRestante={setTiempoRestante} 
           />
         </div>
       )}

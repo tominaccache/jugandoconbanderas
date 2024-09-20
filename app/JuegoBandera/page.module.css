@@ -1,0 +1,54 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    padding: 20px;
+}
+
+.juegoContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 6px 11px 34px -1px rgba(0,0,0,0.27);
+    -webkit-box-shadow: 6px 11px 34px -1px rgba(0,0,0,0.27);
+    -moz-box-shadow: 6px 11px 34px -1px rgba(0,0,0,0.27);
+}
+
+.bandera {
+    width: 100%;
+    width: 450px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.input {
+    padding: 10px;
+    width: 100%;
+    max-width:350px;
+    border: 1px solid #007acc;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #333;
+    margin: 15px;
+}
+
+.button {
+    padding: 10px 20px;
+    margin-bottom: 15px;
+    background-color: #007acc;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #005a99;
+}

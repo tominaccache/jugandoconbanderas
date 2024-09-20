@@ -1,33 +1,16 @@
 'use client';
-import React, { useState } from 'react';
-import styles from './Puntos.module.css';
+import React from 'react';
 
-const Puntos = ({ puntos, setPuntos, banderaSeleccionada }) => {
-  const [respuesta, setRespuesta] = useState('');
+const Puntos = ({ puntos, nombreJugador }) => {
+  let mensaje;
 
-  const manejarRespuesta = (e) => {
-    e.preventDefault();
-    if (respuesta.toLowerCase() === banderaSeleccionada.name.toLowerCase()) {
-      setPuntos(puntos + 10);
-    } else {
-      setPuntos(puntos - 1);
-    }
-    setRespuesta('');//limpia la rta
-  };
+  if (nombreJugador) {
+    mensaje = `Puntos de ${nombreJugador}: ${puntos}`;
+  } 
 
   return (
-    <div className={styles.container}>
-      <h2>Puntos: {puntos}</h2>
-      <form onSubmit={manejarRespuesta}>
-        <input
-          type="text"
-          value={respuesta}
-          onChange={(e) => setRespuesta(e.target.value)}
-          placeholder="Adivina el país"
-          required
-        />
-        <button type="submit">Enviar</button>
-      </form>
+    <div>
+      <h2>{mensaje}</h2>
     </div>
   );
 };
