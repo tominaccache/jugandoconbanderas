@@ -1,5 +1,6 @@
 'use client'; 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import Puntos from '../components/Puntos/Puntos';
 import Temporizador from '../components/Timer/Timer';
 import Ayuda from '../components/Ayuda/Ayuda';
@@ -42,6 +43,9 @@ export default function JuegoBandera() {
   };
 
   const manejarTiempoAgotado = () => {
+    if (puntos > 0) {
+      setPuntos(prev => prev - 1);
+    }
     setIsGameActive(false);
     seleccionarBanderaAleatoria(banderas);
   };
@@ -49,12 +53,18 @@ export default function JuegoBandera() {
   const verificarRespuesta = () => {
     if (respuesta.toLowerCase() === banderaSeleccionada.name.toLowerCase()) {
       setPuntos(prev => prev + 10);
+      setPuntos(prev => prev + tiempoRestante);
     } else if (puntos > 0) {
       setPuntos(prev => prev - 1);
     }
     manejarTiempoAgotado();
   };
 
+  const terminarJuego = () => {
+    const jugadoresGuardados = JSON.parse(localStorage.getItem('puntosJugadores')) || [];
+    jugadoresGuardados.push({ nombre: nombreJugador, puntos });
+    localStorage.setItem('puntosJugadores', JSON.stringify(jugadoresGuardados));
+  };
   return (
     <div className={styles.container}>
       {banderaSeleccionada && (
@@ -90,6 +100,9 @@ export default function JuegoBandera() {
             banderaSeleccionada={banderaSeleccionada} 
             setTiempoRestante={setTiempoRestante} 
           />
+          <Link href="/TablaPuntos" className={styles.termina} onClick={terminarJuego}>
+            Terminar Juego
+          </Link>
         </div>
       )}
     </div>

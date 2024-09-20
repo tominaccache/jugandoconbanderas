@@ -52,3 +52,14 @@
 .button:hover {
     background-color: #005a99;
 }
+
+.termina{    
+    padding: 10px 20px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    background-color: #1ec026c2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+}

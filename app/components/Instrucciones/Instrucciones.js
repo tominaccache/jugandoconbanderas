@@ -32,7 +32,8 @@ export default function Instrucciones() {
               <p className={styles.p}>
                 <strong>Respuestas Correctas:</strong> Si adivinas correctamente, ¡sumas <strong>10 puntos</strong>!<br />
                 <strong>Respuestas Incorrectas:</strong> Si fallas, se te restará <strong>1 punto</strong>.<br />
-                Tu puntaje total se mostrará en la pantalla, así podrás ver tu progreso.
+                Tu puntaje total se mostrará en la pantalla, así podrás ver tu progreso.<br />
+                Si <strong>pasan los 15 segundos</strong> y no adivinaste, se restará <strong>1 punto</strong>
               </p>
             </li>
             <li className={styles.li}>
@@ -64,7 +65,7 @@ export default function Instrucciones() {
           </ul>
     
           <h3 className={styles.h3}>¡Que empiece el juego!</h3>
-          <p className={styles.p}>Haz clic en "AVANZAR" para escribir tu nombre y luego, iniciar el juego y demostrar tus conocimientos sobre banderas. ¡Buena suerte!</p>
+          <p className={styles.p}>Haz clic en "AVANZAR" para escribir tu nombre y luego, inicia el juego y demuestra tus conocimientos sobre banderas. ¡Buena suerte!</p>
           <Link href="/NombreJugador" className={styles.button}>
              Avanzar
         </Link>
